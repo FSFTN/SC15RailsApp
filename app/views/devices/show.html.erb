@@ -8,6 +8,12 @@
   <dd><%= @device.device_id %></dd>
   <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
   <dd><%= @device.email %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:hasRegistered) %>:</strong></dt>
+  <%if @device.hasRegistered%>
+  <dd>Registered</dd>
+  <%else%>
+  <dd>Not registered</dd>
+  <%end%>
 </dl>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),

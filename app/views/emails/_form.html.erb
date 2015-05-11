@@ -2,7 +2,7 @@
   <%= f.input :subject %>
   <%= error_span(@email[:subject]) %>
   <h3>Content</h3><br>
-  <%= f.input :content,class: "tinymce", rows: 40,cols: 120 %>
+  <%= f.input :content,as: :bootsy, rows: 40,cols: 120 %>
   <%= error_span(@email[:content]) %>
 
   <%= f.button :submit, :class => 'btn-primary' %>

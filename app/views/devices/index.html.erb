@@ -8,6 +8,7 @@
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:device_id) %></th>
       <th><%= model_class.human_attribute_name(:email) %></th>
+      <th><%= model_class.human_attribute_name(:hasRegistered) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -18,6 +19,11 @@
         <td><%= link_to device.id, device_path(device) %></td>
         <td><%= device.device_id %></td>
 	<td><%= device.email %></td>
+	<%if device.hasRegistered %>
+	<td>Registered user</td>
+	<%else%>
+	<td>Not registered</td>
+	<%end%>
         <td><%=l device.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),

@@ -26,7 +26,12 @@ class DevicesController < ApplicationController
   # POST /devices.json
   def create
     @device = Device.new(device_params)
-
+    participants = Participant.all
+    participants.each do |participant|
+	if @device.email.eql? participant.email
+		@device.hasRegistered = true
+	end
+    end
     respond_to do |format|
       if @device.save
         format.html { redirect_to @device, notice: 'Device was successfully created.' }
@@ -70,6 +75,6 @@ class DevicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def device_params
-      params.require(:device).permit(:device_id,:email)
+      params.require(:device).permit(:device_id,:email,:hasRegistered)
     end
 end
