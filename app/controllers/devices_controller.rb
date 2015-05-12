@@ -52,11 +52,12 @@ class DevicesController < ApplicationController
 	notifications = Notification.where("DATE(created_at) <= ?",Date.today)
 	
 	notifications.each do |notification|
-		options = {data:{title:notification.title,content:notification.content,time_stamp:Time.now.to_s}}
+		puts notification.title+"/n"
+		options = {data:{title:notification.title,content:notification.content,time_stamp:notification.created_at.to_s}}
 		response = gcm.send(device_id,options)
 		puts response[:body]
 	end
-        
+        puts "-------------------------------------------------------------------------------------------------------------------------------------\n----------------------------------------------------\n-----------------------------------------"
 	format.html { redirect_to @device, notice: 'Device was successfully created.' }
         format.json { render :show, status: 201, location: @device }
       else
