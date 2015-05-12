@@ -28,6 +28,7 @@ class DevicesController < ApplicationController
   def create
     @device = Device.new(device_params)
     
+    puts @device.email
     api_key = Api.first.api_key
     device_id = []
     device_id.push(@device.device_id)
@@ -44,11 +45,19 @@ class DevicesController < ApplicationController
       if @device.save
 	
 	gcm = GCM.new(api_key)
-	options = {data: {title:"Welcome!",content:"Your device has been registered!"}}
+	options = {data: {title:"Welcome!",content:"Your device has been registered!",time_stamp:Time.now.to_s}}
 	response = gcm.send(device_id,options)
 	puts response[:body]
 	
-        format.html { redirect_to @device, notice: 'Device was successfully created.' }
+	notifications = Notification.where("DATE(created_at) <= ?",Date.today)
+	
+	notifications.each do |notification|
+		options = {data:{title:notification.title,content:notification.content,time_stamp:Time.now.to_s}}
+		response = gcm.send(device_id,options)
+		puts response[:body]
+	end
+        
+	format.html { redirect_to @device, notice: 'Device was successfully created.' }
         format.json { render :show, status: 201, location: @device }
       else
         format.html { render :new }
