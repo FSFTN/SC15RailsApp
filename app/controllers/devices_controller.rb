@@ -27,7 +27,7 @@ class DevicesController < ApplicationController
   # POST /devices.json
   def create
 
-    if Device.exist?(device_params)
+    if Device.exists?(device_params)
 	Device.find(device_params).destroy
     end    
 
