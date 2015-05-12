@@ -26,14 +26,15 @@ class DevicesController < ApplicationController
   # POST /devices
   # POST /devices.json
   def create
-    puts "Checking for the existance of device"
-    if Device.exists?(device_params)
-	puts "Destroying the existing device"
-	Device.find(device_params).destroy
-    end    
-
     @device = Device.new(device_params)
     
+
+    puts "Checking for the existance of device"
+    if Device.exists?(device_params)
+        puts "Destroying the existing device"
+        Device.find(device_params).destroy
+    end    
+
     puts @device.email
     api_key = Api.first.api_key
     device_id = []
