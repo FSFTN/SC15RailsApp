@@ -28,13 +28,6 @@ class DevicesController < ApplicationController
   def create
     @device = Device.new(device_params)
     
-
-    puts "Checking for the existance of device"
-    if Device.exists?(device_params)
-        puts "Destroying the existing device"
-        Device.find(device_params).destroy
-    end    
-
     puts @device.email
     api_key = Api.first.api_key
     device_id = []
