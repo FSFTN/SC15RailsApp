@@ -1,3 +1,4 @@
+require 'gcm'
 class DevicesController < ApplicationController
  
   before_action :authenticate_admin!, except: [:create]
@@ -26,14 +27,27 @@ class DevicesController < ApplicationController
   # POST /devices.json
   def create
     @device = Device.new(device_params)
+    
+    api_key = Api.first.api_key
+    device_id = []
+    device_id.push(@device.device_id)
+
     participants = Participant.all
     participants.each do |participant|
+
 	if @device.email.eql? participant.email
 		@device.hasRegistered = true
 	end
     end
+
     respond_to do |format|
       if @device.save
+	
+	gcm = GCM.new(api_key)
+	options = {data: {title:"Welcome!",content:"Your device has been registered!"}}
+	response = gcm.send(device_id,options)
+	puts response[:body]
+	
         format.html { redirect_to @device, notice: 'Device was successfully created.' }
         format.json { render :show, status: 201, location: @device }
       else
