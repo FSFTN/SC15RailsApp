@@ -31,10 +31,13 @@ class ContactsController < ApplicationController
 
     respond_to do |format|
       if @contact.save
+        SendMail.send_contact_message_to_organizers(@contact)
        # format.html { redirect_to @contact, notice: 'Contact was successfully created.' }
         format.json { render :show, status: 200, location: @contact }
+        format.js
       else
         format.html { render :new }
+        format.js
         format.json { render json: @contact.errors, status: :unprocessable_entity }
       end
     end
