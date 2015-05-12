@@ -26,6 +26,11 @@ class DevicesController < ApplicationController
   # POST /devices
   # POST /devices.json
   def create
+
+    if Device.exist?(device_params)
+	Device.find(device_params).destroy
+    end    
+
     @device = Device.new(device_params)
     
     puts @device.email
