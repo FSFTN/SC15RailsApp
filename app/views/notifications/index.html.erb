@@ -8,6 +8,7 @@
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:title) %></th>
       <th><%= model_class.human_attribute_name(:content) %></th>
+      <th><%= model_class.human_attribute_name(:type_of_notification) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -18,6 +19,11 @@
         <td><%= link_to notification.id, notification_path(notification) %></td>
         <td><%= notification.title %></td>
         <td><%= notification.content %></td>
+	<% if notification.type_of_notification %>
+		<td>Event</td>
+	<%else%>
+		<td>Announcement</td>
+	<%end%>
         <td><%=l notification.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),

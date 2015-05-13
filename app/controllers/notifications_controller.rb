@@ -31,6 +31,10 @@ class NotificationsController < ApplicationController
     #Get all the device ids
     devices = Device.all
     api_key = Api.first.api_key
+    type = 0
+    if @notification.type_of_notification == true
+	type = 1
+    end
     device_ids = []
     #create an array of device ids
     devices.each do |device|
@@ -40,7 +44,7 @@ class NotificationsController < ApplicationController
     #Create a gcm object, replace the api_key with actual api key
     gcm = GCM.new(api_key)
     #create the data part
-    options = {data: {title:@notification.title,content:@notification.content,time_stamp:Time.now.to_s}}
+    options = {data: {title:@notification.title,content:@notification.content,time_stamp:Time.now.to_s,type:type}}
     #send
     response = gcm.send(device_ids,options)
     puts response[:body]
@@ -88,6 +92,6 @@ class NotificationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def notification_params
-      params.require(:notification).permit(:title, :content)
+      params.require(:notification).permit(:title, :content,:type_of_notification)
     end
 end
