@@ -45,7 +45,7 @@ class DevicesController < ApplicationController
       if @device.save
 	
 	gcm = GCM.new(api_key)
-	options = {data: {title:"Welcome!",content:"Your device has been registered!",time_stamp:Time.now.to_s}}
+	options = {data: {title:"Welcome!",content:"Your device has been registered!",time_stamp:Time.now.to_s,type:0}}
 	response = gcm.send(device_id,options)
 	puts response[:body]
 	
@@ -53,7 +53,11 @@ class DevicesController < ApplicationController
 	
 	notifications.each do |notification|
 		puts notification.title+"/n"
-		options = {data:{title:notification.title,content:notification.content,time_stamp:notification.created_at.to_s}}
+		type = 0
+		if notification.type_of_notification == true
+			type = 1
+		end
+		options = {data:{title:notification.title,content:notification.content,time_stamp:notification.created_at.to_s,type:notification.type})
 		response = gcm.send(device_id,options)
 		puts response[:body]
 	end
