@@ -57,7 +57,7 @@ class DevicesController < ApplicationController
 		if notification.type_of_notification == true
 			type = 1
 		end
-		options = {data:{title:notification.title,content:notification.content,time_stamp:notification.created_at.to_s,type:type})
+		options = {data:{title:notification.title,content:notification.content,time_stamp:notification.created_at.to_s,type:type}}
 		response = gcm.send(device_id,options)
 		puts response[:body]
 	end
