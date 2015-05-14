@@ -31,7 +31,7 @@ class ContactsController < ApplicationController
 
     respond_to do |format|
       if @contact.save
-        SendMail.send_contact_message_to_organizers(@contact)
+        puts SendMail.send_contact_message_to_organizers(@contact)
         format.html { redirect_to @contact, notice: 'Contact was successfully created.' }
         format.json { render :show, status: 200, location: @contact }
        # format.js
