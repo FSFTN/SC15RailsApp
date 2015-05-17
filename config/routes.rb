@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
  
+  resources :feedbacks
+
   mount Bootsy::Engine => '/bootsy', as: 'bootsy'
   resources :emails
 

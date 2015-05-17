@@ -12,6 +12,7 @@
 <li><%= link_to 'Push Notifications', notifications_path, :class => 'navbar-link'%></li>
 <li><%= link_to 'Devices', devices_path, :class => 'navbar-link'%></li>
 <li><%= link_to 'Send Email', emails_path, :class => 'navbar-link' %></li>
+<li><%= link_to 'Feedbacks', feedbacks_path, :class => 'navbar-link'%></li>
 </ul>
   Logged in as <strong><%= current_admin.email %></strong>.
   <%= link_to "Logout", destroy_admin_session_path, method: :delete, :class => 'navbar-link'  %>

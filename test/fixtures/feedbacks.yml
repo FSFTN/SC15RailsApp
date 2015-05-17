@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: MyString
+  timestamp: MyString
+  session_id: 1
+  message: MyText
+  rating: 1
+
+two:
+  user_id: MyString
+  timestamp: MyString
+  session_id: 1
+  message: MyText
+  rating: 1

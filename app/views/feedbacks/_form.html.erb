@@ -1,0 +1,16 @@
+<%= simple_form_for @feedback, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :user_id %>
+  <%= error_span(@feedback[:user_id]) %>
+  <%= f.input :timestamp %>
+  <%= error_span(@feedback[:timestamp]) %>
+  <%= f.input :session_id %>
+  <%= error_span(@feedback[:session_id]) %>
+  <%= f.input :message %>
+  <%= error_span(@feedback[:message]) %>
+  <%= f.input :rating %>
+  <%= error_span(@feedback[:rating]) %>
+
+  <%= f.button :submit, :class => 'btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                feedbacks_path, :class => 'btn btn-default' %>
+<% end %>
