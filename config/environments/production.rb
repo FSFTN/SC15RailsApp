@@ -68,8 +68,8 @@ Rails.application.configure do
     :address   => "smtp.mandrillapp.com",
     :port      => 25, # ports 587 and 2525 are also supported with STARTTLS
     :enable_starttls_auto => true, # detects and uses STARTTLS
-    :user_name => "summercamp2k15@gmail.com",
-    :password  => "rXRPmeZd9HY7ghN922W8ew", # SMTP password is any valid API key
+    :user_name => "summercamp@fsftn.org",
+    :password  => "fPBOijQPtAB7tXYj9RV5NQ", # SMTP password is any valid API key
     :authentication => 'login', # Mandrill supports 'plain' or 'login'
     :domain => 'https://sc15.herokuapp.com', # your domain to identify your server when connecting
   }
